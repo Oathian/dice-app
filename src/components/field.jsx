@@ -4,7 +4,7 @@ const Field = ({ userInput, setDiceRoll, handleRoll}) => {
         <section id="field" onSubmit={handleRoll}>
             <form>
                 <label>
-                    <input value={userInput} onChange={(event) => setDiceRoll(event.target.value)} id="roll-input" />
+                    <input autoComplete="off" value={userInput} onChange={(event) => setDiceRoll(event.target.value)} id="roll-input" />
                 </label>
                 <button id="submit-roll">&gt;</button>
             </form>

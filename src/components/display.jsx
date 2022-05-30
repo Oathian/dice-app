@@ -15,10 +15,13 @@ const Display = () => {
             for(let i = 0; i < diceRoll.length; i++) {
                 const numberOfDice = diceRoll[i].match(/^\d+/i);
                 const diceSide = diceRoll[i].match(/\d+$/i);
-                resultArray.push((1 + Math.floor(Math.random() * diceSide[0])) * numberOfDice[0]);
-                console.log(resultArray)
+                let sum = 0;
+                while (numberOfDice[0] > 0) {
+                    sum += (1 + Math.floor(Math.random() * diceSide[0]))
+                    numberOfDice[0]--;
+                }
+                resultArray.push(sum);
             }
-
             return resultArray.join(", ");
         }
     };
@@ -26,12 +29,11 @@ const Display = () => {
     const handleRoll = (event) => {
         event.preventDefault();
         updateDisplay((rollResult) => {
-            const newObj = {...rollResult};
+            const newObj = {};
             setDiceRoll((userInput) => {
                 const regex = /\d+D\d+/ig;
                 if(regex.test(userInput)) {
-                    newObj.userInput = "You rolled "
-                    newObj.userInput += rollStandardDice(userInput);
+                    newObj.userInput = rollStandardDice(userInput);
                 }
                 return "";
             })
@@ -41,7 +43,7 @@ const Display = () => {
 
     return (
         <main id="display">
-            <Tray rollResult={rollResult}/>
+            <Tray rollResult={rollResult} updateDisplay={updateDisplay}/>
             <Field userInput={userInput} setDiceRoll={setDiceRoll} handleRoll={handleRoll}/>
         </main>
     )
