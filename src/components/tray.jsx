@@ -17,7 +17,9 @@ const Tray = ({ rollResult, updateDisplay }) => {
                 <p id="output">{rollResult.userInput}</p>
             </>
             <>
-                <button onClick={() => clearOutput()} id="tray-bin">Bin</button>
+                <button onClick={() => clearOutput()} id="tray-bin">
+                    <img draggable="false" id="bin" src="bin.svg" alt="bin"></img>
+                </button>
             </>
         </section>
     )
